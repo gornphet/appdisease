@@ -93,6 +93,7 @@
         const Star = (props) => <IconBase d={<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />} {...props} />;
         const Heart = (props) => <IconBase d={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />} {...props} />;
         const Smile = (props) => <IconBase d={<><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /></>} {...props} />;
+        const Droplet = (props) => <IconBase d={<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />} {...props} />;
 
         // --- ข้อมูล ---
         const diseaseData = [
@@ -165,6 +166,24 @@
             decoration: <Star className="absolute -right-2 -top-2 w-8 h-8 text-orange-300 opacity-50 -rotate-12" />,
             images: [
               "https://res.cloudinary.com/dygneumft/image/upload/v1767323767/%E0%B8%A1%E0%B8%B2%E0%B8%95%E0%B8%A3%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B9%88%E0%B8%AD/%E0%B9%84%E0%B8%82%E0%B9%89%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88/unnamed_minnrf.png"
+            ]
+          },
+          {
+            id: 'dengue',
+            title: '3 เก็บ สกัดยุงลายในโรงเรียน',
+            description: 'มาตรการป้องกันในโรงเรียน',
+            source: 'กรมควบคุมโรค กระทรวงสาธารณสุข',
+            admin: 'แอดมินระบบ',
+            date: '21 พฤษภาคม 2569 เวลา 15:59 น.',
+            icon: <Droplet className="w-8 h-8 text-white" />,
+            color: 'bg-purple-100',
+            accentColor: 'bg-purple-400',
+            borderColor: 'border-purple-400',
+            textColor: 'text-purple-700',
+            shadowColor: 'shadow-purple-200',
+            decoration: <Star className="absolute -right-2 -top-2 w-8 h-8 text-purple-300 opacity-50 rotate-12" />,
+            images: [
+              "https://res.cloudinary.com/dygneumft/image/upload/v1779351701/%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%A8%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2/698876268_122166888998901421_9068753339573876036_n_dvo9d5.jpg"
             ]
           }
         ];
@@ -246,12 +265,19 @@
                         shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] relative overflow-hidden
                       `}>
                         {selectedDisease.decoration}
-                        <div className={`p-3 rounded-2xl ${selectedDisease.accentColor} shadow-sm rotate-3 text-white`}>
+                        <div className={`p-3 rounded-2xl ${selectedDisease.accentColor} shadow-sm rotate-3 text-white shrink-0`}>
                             {selectedDisease.icon}
                         </div>
-                        <div>
-                          <h2 className={`text-xl font-bold ${selectedDisease.textColor}`}>{selectedDisease.title}</h2>
+                        <div className="flex-1">
+                          <h2 className={`text-xl font-bold ${selectedDisease.textColor} leading-tight`}>{selectedDisease.title}</h2>
                           <p className="text-sm text-gray-600 mt-1 opacity-90">{selectedDisease.description}</p>
+                          
+                          {(selectedDisease.source || selectedDisease.date) && (
+                              <div className="mt-2 text-[11px] text-gray-500 bg-white/60 p-2 rounded-lg border border-white leading-relaxed">
+                                  {selectedDisease.source && <p><span className="font-semibold">ที่มา:</span> {selectedDisease.source}</p>}
+                                  {selectedDisease.date && <p><span className="font-semibold">ข้อมูลเมื่อ:</span> {selectedDisease.date} (โดย {selectedDisease.admin})</p>}
+                              </div>
+                          )}
                         </div>
                       </div>
                     </div>
